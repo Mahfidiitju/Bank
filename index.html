@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pioneer Bank</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="login-area">
+        <h1 class="text-center">Welcome to Pioneer Bank</h1>
+        <div class="submit-area">
+            <h4>Login</h4>
+            <input type="text" class="form-control" placeholder="Email">
+            <br>
+
+            <input type="password" class="form-control" placeholder="Password">
+            <br>
+            <button id="login" class="btn btn-success">Enter</button>
+        </div>
+    </div>
+    <div id="tran">
+        <div class="row">
+            <div class="col-md-4 ">
+                <div class="deposit status">
+                    <h5>Deposit</h5>
+                    <h2>$<span id="addDe">00</span></h2>
+                </div>
+
+            </div>
+            <div class="col-md-4 ">
+                <div class="withdraw status">
+                    <h5>Withdraw</h5>
+                    <h2>$ <span id="ww">00</span></h2>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="balance status">
+                    <h5>Balance</h5>
+                    <h2> $<span id="addBal">1230</span> </h2>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Deposit</h4>
+                    <input id="damount" type="text" class="form-control" placeholder="$ amount you want to diposit">
+                    <br>
+                    <button id="addDeposit" class="btn btn-success">Deposit
+                    </button>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Withdraw</h4>
+                    <input id="addW" type="text" class="form-control" placeholder="$ amount you want to withdraw">
+                    <br>
+                    <button id="addWithdraw" class="btn btn-success">Withdraw
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <script>
+            const loginBtn = document.getElementById('login');
+            loginBtn.addEventListener('click', function () {
+                const loginArea = document.getElementById('login-area');
+                loginArea.style.display = "none";
+                const tran = document.getElementById('tran');
+                tran.style.display = "block";
+            }
+            )
+
+            const dbtn = document.getElementById('addDeposit');
+            dbtn.addEventListener('click', function () {
+                const depositNum=getInput("damount");
+
+                update('addDe', depositNum);
+                update('addBal', depositNum);
+                document.getElementById('damount').value = "";
+
+            })
+            function update(id, depositNum) {
+                const addBal = document.getElementById(id).innerText;
+                const balance = parseFloat(addBal);
+                const num = balance + depositNum;
+                document.getElementById(id).innerText = num;
+            }
+
+
+            //     const wBtn=document.getElementById('addWithdraw');
+            //     wBtn.addEventListener('click',function()
+            //     {
+            //         const loseAmount=document.getElementById('addW').value;
+            //         const loseNum= parseFloat(loseAmount);
+
+
+            //     lose('ww',loseNum);
+            //     lose('addBal',loseNum);
+            // })
+            //     function lose(idd,loseNum)
+            //     {
+            //         const addB=document.getElementById(idd).innerText;
+            //         const balan=parseFloat(addB);
+            //         const number=balan-loseNum;
+            //         document.getElementById(idd).innerText=number;
+            //     }
+
+            const wBtn = document.getElementById('addWithdraw');
+            wBtn.addEventListener('click', function () {
+                const withdrawNum= getInput('addW');
+                console.log(withdrawNum);
+
+                update('ww',withdrawNum);
+                update('addBal',-1*withdrawNum);
+                document.getElementById('addW').value='';
+            })
+
+            function getInput(id) {
+                const withdrawAmount = document.getElementById(id).value;
+                const withdrawNum = parseFloat(withdrawAmount);
+                return withdrawNum;
+            }
+
+        </script>
+</body>
+
+</html>
